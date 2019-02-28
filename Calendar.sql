@@ -1,8 +1,4 @@
-
-DECLARE @StartDate DATE = '20190201', @NumberOfMonths INT =1;
-
--- prevent set or regional settings from interfering with 
--- interpretation of dates / literals
+DECLARE @StartDate DATE = '20200201', @NumberOfMonths INT =36;
 
 SET DATEFIRST 1;
 SET DATEFORMAT mdy;
@@ -36,12 +32,11 @@ FROM
       rn = ROW_NUMBER() OVER (ORDER BY s1.[object_id])
     FROM sys.all_objects AS s1
     CROSS JOIN sys.all_objects AS s2
-    -- on my system this would support > 5 million days
     ORDER BY s1.[object_id]
   ) AS x
 ) AS y;
 
-select * from
+select [MonthName], [week],[Monday],[Tuesday],[Wednesday],[Thursday],[Friday],[Saturday],[Sunday] from
 (select [MonthName], [week],[day],[dayName],[FirstOfMonth] 
 from #Calendar) as C
 pivot(
