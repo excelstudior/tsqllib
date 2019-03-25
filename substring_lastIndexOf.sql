@@ -19,3 +19,19 @@ then substring(@str2,1, (len(@str2)- CHARINDEX('/',Reverse(@str2)))) else @str2 
 select 
 case when len(@str3)- len(substring(@str3,1, (len(@str3)- CHARINDEX('/',Reverse(@str3)))))=37
 then substring(@str3,1, (len(@str3)- CHARINDEX('/',Reverse(@str3)))) else @str3 end 
+
+
+--another thought
+--occurence of string 
+declare @str nvarchar(max)
+set @str='/ad/a/addsf/fdd/'
+
+declare @strToCheck nvarchar(max)
+set @strToCheck='ad'
+
+--get the length of @strToCheck
+
+declare @lenOfStrToCheck int
+set @lenOfStrToCheck=len(@strToCheck)
+
+select (len(@str)-len(replace(@str,@strToCheck,'')))/@lenOfStrToCheck
